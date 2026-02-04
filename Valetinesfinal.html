@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Shubhankar ❤️</title>
+
+
+<style>
+body{
+margin:0;
+font-family: Arial;
+background:black;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* Intro Screen */
+#intro{
+position:fixed;
+width:100%;
+height:100vh;
+background:rgb(223, 32, 32);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:10;
+}
+
+#intro h1{
+font-size:40px;
+animation: fade 3s infinite alternate;
+}
+
+@keyframes fade{
+from{opacity:0.3;}
+to{opacity:1;}
+}
+
+/* Main Card */
+.card{
+background:white;
+color:rgb(216, 13, 43);
+margin:30px auto;
+padding:25px;
+border-radius:20px;
+width:90%;
+max-width:400px;
+display:none;
+}
+
+/* Buttons */
+button{
+padding:12px 20px;
+margin:10px;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+#yesBtn{
+background:#ff4d6d;
+color:white;
+}
+
+#noBtn{
+background:gray;
+color:white;
+position:relative;
+}
+
+/* Slideshow */
+.slide{
+width:100%;
+border-radius:15px;
+display:none;
+}
+
+/* Popup */
+.popup{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:black;
+padding:20px;
+border-radius:20px;
+z-index:5;
+width:80%;
+max-width:350px;
+}
+
+/* Countdown */
+#countdown{
+font-size:18px;
+margin:10px;
+}
+
+/* Hearts */
+.heart{
+position:fixed;
+color:red;
+animation:float 5s linear infinite;
+z-index:9999;
+pointer-events:none;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="intro">
+<h1>Enter Secret Password ❤️</h1>
+<input type="password" id="pass" placeholder="Hint: Your Anniversary Date">
+<br><br>
+<button onclick="checkPass()">Enter</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="card" id="mainCard">
+<h1>Shubhankar ❤️</h1>
+<h2>Will you be my Valentine? 💕</h2>
+
+<div id="countdown"></div>
+
+<img class="slide" src="photo1.jpg">
+<img class="slide" src="photo2.jpg">
+<img class="slide" src="photo3.jpg">
+
+<button id="yesBtn" onclick="yesClicked()">Yes 😍</button>
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+
+<p id="msg"></p>
+</div>
+
+<!-- LOVE LETTER -->
+<div class="popup" id="popup">
+<h2>💌 My Love</h2>
+<p>
+Dear Shubhankar,<br><br>
+You are my happiness, my peace, and my forever.  
+Every moment with you feels magical.  
+Thank you for loving me the way you do ❤️  
+Happy Valentine’s Day!
+</p>
+<button onclick="closePopup()">Close</button>
+</div>
+
+<script>
+
+/* PASSWORD */
+function checkPass(){
+let password = document.getElementById("pass").value;
+
+if(password === "271125"){
+document.getElementById("intro").style.display="none";
+document.getElementById("mainCard").style.display="block";
+}
+else alert("Wrong Password 😜");
+}
+
+/* SLIDESHOW */
+let slideIndex=0;
+showSlides();
+
+function showSlides(){
+let slides=document.getElementsByClassName("slide");
+
+for(let i=0;i<slides.length;i++)
+slides[i].style.display="none";
+
+slideIndex++;
+if(slideIndex>slides.length) slideIndex=1;
+
+slides[slideIndex-1].style.display="block";
+setTimeout(showSlides,2500);
+}
+
+/* NO BUTTON RUN */
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
+}
+
+/* YES CLICK */
+function yesClicked(){
+document.getElementById("msg").innerHTML="Yayyyy ❤️";
+document.getElementById("popup").style.display="block";
+fireworks();
+}
+
+/* CLOSE POPUP */
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+/* FLOATING HEARTS */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},400);
+
+/* COUNTDOWN */
+let valentineDate=new Date("Feb 14 2026 00:00:00").getTime();
+
+setInterval(()=>{
+let now=new Date().getTime();
+let gap=valentineDate-now;
+
+let d=Math.floor(gap/(1000*60*60*24));
+let h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+let m=Math.floor((gap%(1000*60*60))/(1000*60));
+let s=Math.floor((gap%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML=
+"Valentine Countdown: "+d+"d "+h+"h "+m+"m "+s+"s";
+},1000);
+
+/* FIREWORKS */
+function fireworks(){
+for(let i=0;i<50;i++){
+let f=document.createElement("div");
+f.innerHTML="✨";
+f.style.position="fixed";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
+f.style.fontSize="25px";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1500);
+}
+}
+
+</script>
+
+</body>
+</html>
